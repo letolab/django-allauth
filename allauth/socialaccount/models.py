@@ -280,6 +280,12 @@ class SocialLogin(object):
         if next_url:
             state['next'] = next_url
         state['process'] = request.REQUEST.get('process', 'login')
+        extra_state_variables = getattr(app_settings,
+                                        'EXTRA_STATE_VARIABLES', [])
+        for extra_variable_name in extra_state_variables:
+            extra_variable_value = request.REQUEST.get(extra_variable_name)
+            if extra_variable_value:
+                state[extra_variable_name] = state[extra_varible_value]
         return state
 
     @classmethod

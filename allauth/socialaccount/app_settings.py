@@ -54,6 +54,15 @@ class AppSettings(object):
                              account_settings.EMAIL_VERIFICATION)
 
     @property
+    def EXTRA_STATE_VARIABLES(self):
+        """
+        Extra GET variables to store in the SocialLogin state
+        """
+        from allauth.account import app_settings as account_settings
+        return self._setting("EXTRA_STATE_VARIABLES",
+                             account_settings.EXTRA_STATE_VARIABLES)
+
+    @property
     def ADAPTER(self):
         return self._setting('ADAPTER',
                              'allauth.socialaccount.adapter'
